@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {Mensaje} from '../interface/mensaje.interface';
 import {map} from 'rxjs/operators';
+
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
   public chats:Mensaje[]=[];
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore,
+              public auth: AngularFireAuth) { }
 
   cargarMensajes(){
     this.itemsCollection = this.afs.collection<Mensaje>('chats',ref=> ref.orderBy('fecha','desc').limit(5));
