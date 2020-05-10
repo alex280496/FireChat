@@ -60,9 +60,10 @@ export class ChatService {
   agregarMensaje(texto: string) {
     //Falta el UID del usuario
     let mensaje: Mensaje = {
-      nombre: 'Demo',
+      nombre: this.usuario.nombre,
       mensaje: texto,
-      fecha: new Date().getTime()
+      fecha: new Date().getTime(),
+      uid:this.usuario.uid
     }
     return this.itemsCollection.add(mensaje);//para hacer la inserccion de un nuevo mensaje en firebase
     //esto me devuelve una promesaa
